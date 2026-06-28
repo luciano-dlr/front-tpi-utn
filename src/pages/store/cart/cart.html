@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Store - Carrito de Compras</title>
+<link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="logo">Food Store</h1>
+            <nav class="main-nav">
+                <a href="../home/home.html">Catálogo</a>
+                <a href="../cart/cart.html" class="active"> Carrito</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="cart-container">
+        <h2>Mi Carrito</h2>
+        
+        <div id="empty-cart-message" class="empty-cart-message">
+            <p> Tu carrito está vacío</p>
+            <button onclick="window.location.href='../home/home.html'" class="btn-primary">
+                Ver productos
+            </button>
+        </div>
+
+        <div id="cart-content" class="cart-content" style="display: none;">
+            <div id="cart-items-container" class="cart-items"></div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Total de productos:</span>
+                    <span id="total-items">0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total a pagar:</span>
+                    <span id="cart-total">$0</span>
+                </div>
+                <div class="cart-actions">
+                    <button id="clear-cart-btn" class="btn-secondary">Vaciar carrito</button>
+                    <button id="continue-shopping-btn" class="btn-primary">Seguir comprando</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./cart.ts"></script>
+</body>
+</html>

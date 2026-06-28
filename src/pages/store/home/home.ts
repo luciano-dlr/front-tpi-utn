@@ -1,0 +1,206 @@
+﻿import { getCategories, PRODUCTS } from "../../../data/data";
+import type { ICategory } from "../../../types/category";
+import type { Product } from "../../../types/product";
+import {  CartService } from "../../../utils/localStorage";
+
+
+class StoreHome {
+    private products: Product[] = PRODUCTS;
+    private categories: ICategory[] = getCategories();
+    private currentProducts: Product[] = [...this.products];
+    private currentCategory: string | null = null;
+    private searchTerm: string = '';
+    
+    constructor() {
+        console.trace('   traza constructor');
+        this.renderCategories();
+        this.renderProducts();
+        this.setupEventListeners();
+        this.updateCartCount();
+    }
+    
+    private setupEventListeners(): void {
+        const searchInput = document.getElementById('search-input') as HTMLInputElement;
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                this.searchTerm = (e.target as HTMLInputElement).value.toLowerCase();
+                this.applyFilters();
+            });
+        } else {
+            console.warn('earch-input NO encontrado en el DOM');
+        }
+        
+        const showAllBtn = document.getElementById('show-all-btn');
+        if (showAllBtn) {
+            showAllBtn.addEventListener('click', () => {
+                this.currentCategory = null;
+                this.applyFilters();
+                this.setActiveCategory('');
+            });
+        } else {
+            console.warn('show-all-btn NO encontrado en el DOM');
+        }
+    }
+    
+    private applyFilters(): void {
+        let filtered = [...this.products];
+        
+        if (this.currentCategory) {
+            filtered = filtered.filter(product => 
+                product.categorias.some(cat => cat.nombre === this.currentCategory)
+            );
+        }
+        
+        if (this.searchTerm) {
+            filtered = filtered.filter(product => 
+                product.nombre.toLowerCase().includes(this.searchTerm)
+            );
+        }
+        
+        this.currentProducts = filtered;
+        this.renderProducts();
+        this.showNoResultsMessage(filtered.length === 0);
+    }
+    
+    private showNoResultsMessage(isEmpty: boolean): void {
+        const container = document.getElementById('contenedor-productos');
+        const noResultsMsg = document.getElementById('no-results-message');
+        
+        if (isEmpty && container) {
+            if (!noResultsMsg) {
+                const messageDiv = document.createElement('div');
+                messageDiv.id = 'no-results-message';
+                messageDiv.className = 'no-results';
+                messageDiv.innerHTML = '<p>No se encontraron productos que coincidan con tu búsqueda.</p>';
+                container.appendChild(messageDiv);
+            }
+        } else if (noResultsMsg) {
+            noResultsMsg.remove();
+        }
+    }
+    
+    private renderCategories(): void {
+        const container = document.getElementById('lista-categorias');
+        if (!container) {
+            return;
+        }
+        
+        container.innerHTML = '';
+        
+        this.categories.forEach(category => {
+            const li = document.createElement('li');
+            const button = document.createElement('button');
+            button.textContent = category.nombre;
+            button.className = 'category-btn';
+            button.addEventListener('click', () => {
+                this.currentCategory = category.nombre;
+                this.applyFilters();
+                this.setActiveCategory(category.nombre);
+            });
+            li.appendChild(button);
+            container.appendChild(li);
+        });
+    }
+    
+    private setActiveCategory(activeCategory: string): void {
+        const buttons = document.querySelectorAll('.category-btn');
+        buttons.forEach(btn => {
+            if (btn.textContent === activeCategory) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+        
+        const showAllBtn = document.getElementById('show-all-btn');
+        if (showAllBtn) {
+            if (activeCategory === '') {
+                showAllBtn.classList.add('active');
+            } else {
+                showAllBtn.classList.remove('active');
+            }
+        }
+    }
+    
+    private renderProducts(): void {
+        const container = document.getElementById('contenedor-productos');
+        if (!container) {
+            console.warn(' contenedor-productos NO encontrado en el DOM');
+            return;
+        }
+        
+        if (this.currentProducts.length === 0) {
+            this.showNoResultsMessage(true);
+            return;
+        }
+        
+        container.innerHTML = '';
+        
+        this.currentProducts.forEach(product => {
+            const productCard = this.createProductCard(product);
+            container.appendChild(productCard);
+        });
+    }
+    
+    private createProductCard(product: Product): HTMLElement {
+        const availableStock = CartService.getAvailableStock(product);
+        const outOfStock = !product.disponible || availableStock <= 0;
+        
+        const article = document.createElement('article');
+        article.className = 'product-card';
+        article.innerHTML = `
+            <img src="${product.imagen}" alt="${product.nombre}" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/300x200?text=${product.nombre}'">
+            <h3>${product.nombre}</h3>
+            <p class="product-description">${product.descripcion}</p>
+            <strong class="product-price">$${product.precio.toLocaleString()}</strong>
+            <p class="product-stock">Stock: ${availableStock}</p>
+            ${outOfStock ? '<span class="out-of-stock">Sin stock</span>' : ''}
+            <button class="btn-agregar" data-product-id="${product.id}" ${outOfStock ? 'disabled' : ''}>
+                Agregar al carrito
+            </button>
+        `;
+        
+        const addButton = article.querySelector('.btn-agregar');
+        if (addButton && product.disponible && availableStock > 0) {
+            addButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.addToCart(product);
+            });
+        }
+        
+        return article;
+    }
+    
+    private addToCart(product: Product): void {
+        if (CartService.getAvailableStock(product) <= 0) {
+            alert('No hay suficiente stock disponible');
+            this.renderProducts();
+            return;
+        }
+        CartService.addProduct(product);
+        this.updateCartCount();
+        this.renderProducts();
+    }
+
+    private updateCartCount(): void {
+        const cart = CartService.getCart();
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        
+        const cartCountElement = document.getElementById('cart-count');
+        if (cartCountElement) {
+            cartCountElement.textContent = totalItems.toString();
+            cartCountElement.style.display = totalItems > 0 ? 'inline-block' : 'none';
+        }
+    }
+}
+
+
+let storeHomeInstance: StoreHome | null = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (!storeHomeInstance) {
+        storeHomeInstance = new StoreHome();
+    } else {
+        console.log(' Instancia ya existía, se saltó la creación');
+    }
+});
