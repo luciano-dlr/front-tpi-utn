@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="../../../style/admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-header-container">
+            <h1 class="admin-logo">Food Store — Panel de Administración</h1>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <a href="../adminHome/adminHome.html" class="active">Dashboard</a>
+                <a href="../categories/categories.html">Categorías</a>
+                <a href="../products/products.html">Productos</a>
+                <a href="../orders/orders.html">Pedidos</a>
+                <div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem;"></div>
+                <a href="../../store/home/home.html">Ver Tienda</a>
+                <a href="../../client/orders/orders.html">Mis Pedidos</a>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <h2>Dashboard</h2>
+
+            <!-- Stat Cards -->
+            <div id="stats-grid" class="stats-grid">
+                <div class="stat-card stat-categories">
+                    <span class="stat-label">Categorías</span>
+                    <span class="stat-value" id="stat-categories">0</span>
+                </div>
+                <div class="stat-card stat-products">
+                    <span class="stat-label">Productos</span>
+                    <span class="stat-value" id="stat-products">0</span>
+                </div>
+                <div class="stat-card stat-orders">
+                    <span class="stat-label">Pedidos</span>
+                    <span class="stat-value" id="stat-orders">0</span>
+                </div>
+                <div class="stat-card stat-available">
+                    <span class="stat-label">Productos Disponibles</span>
+                    <span class="stat-value" id="stat-available">0</span>
+                </div>
+            </div>
+
+            <!-- Summary Panels -->
+            <div id="summary-panels" class="summary-panels">
+                <div class="summary-panel" id="panel-categorias">
+                    <h3>Categorías</h3>
+                    <div class="summary-row">
+                        <span class="label">Activas</span>
+                        <span class="value" id="cat-activas">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Inactivas</span>
+                        <span class="value" id="cat-inactivas">0</span>
+                    </div>
+                </div>
+                <div class="summary-panel" id="panel-productos">
+                    <h3>Productos</h3>
+                    <div class="summary-row">
+                        <span class="label">Disponibles</span>
+                        <span class="value" id="prod-disponibles">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">No disponibles</span>
+                        <span class="value" id="prod-no-disponibles">0</span>
+                    </div>
+                </div>
+                <div class="summary-panel" id="panel-pedidos">
+                    <h3>Pedidos por Estado</h3>
+                    <div class="summary-row">
+                        <span class="label">Pendientes</span>
+                        <span class="value" id="order-pendientes">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Confirmados</span>
+                        <span class="value" id="order-confirmados">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Terminados</span>
+                        <span class="value" id="order-terminados">0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Cancelados</span>
+                        <span class="value" id="order-cancelados">0</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="./adminHome.ts"></script>
+</body>
+</html>

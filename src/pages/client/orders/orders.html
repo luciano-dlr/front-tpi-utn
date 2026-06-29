@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pedidos — Food Store</title>
+    <link rel="stylesheet" href="../../../style.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="logo">Food Store</h1>
+            <nav class="main-nav">
+                <a href="../../store/home/home.html">Catálogo</a>
+                <a href="../orders/orders.html" class="active">Mis Pedidos</a>
+                <a href="../../store/cart/cart.html">Carrito</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="client-orders-container">
+        <h2>Mis Pedidos</h2>
+
+        <div id="orders-container" class="orders-container">
+            <!-- Cards rendered by JS -->
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <p>No tenés pedidos aún</p>
+        </div>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal modal-lg">
+            <h3>Pedido #<span id="order-number"></span></h3>
+            <div id="order-detail-content">
+                <div class="order-info-grid">
+                    <div class="order-info-item">
+                        <span class="order-info-label">Fecha</span>
+                        <span id="order-date" class="order-info-value"></span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Estado</span>
+                        <span id="order-status-badge" class="status-badge"></span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Forma de Pago</span>
+                        <span id="order-payment" class="order-info-value"></span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Teléfono</span>
+                        <span id="order-phone" class="order-info-value"></span>
+                    </div>
+                </div>
+
+                <h4>Productos</h4>
+                <table class="order-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unit.</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-items-tbody"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: 600;">Subtotal</td>
+                            <td id="order-subtotal" style="font-weight: 600;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: 600;">Envío</td>
+                            <td id="order-shipping" style="font-weight: 600;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: 700; font-size: 1rem;">Total</td>
+                            <td id="order-total" style="font-weight: 700; font-size: 1rem;"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="btn-close-modal" class="btn-primary">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./orders.ts"></script>
+</body>
+
+</html>

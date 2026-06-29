@@ -668,3 +668,218 @@ body {
 .ver-detalle-link:hover {
     text-decoration: underline;
 }
+
+/* ========================================
+   Status Badges (Client Orders — PRD colors)
+   ======================================== */
+
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.status-pendiente {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.status-confirmado {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-terminado {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-cancelado {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* ========================================
+   Client Orders Layout
+   ======================================== */
+
+.client-orders-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.client-orders-container h2 {
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.client-order-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
+    overflow: hidden;
+}
+
+.client-order-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+.client-order-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.client-order-card-number {
+    font-weight: 700;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.client-order-card-body {
+    padding: 1rem 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.client-order-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.client-order-card-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.client-order-card-value {
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.client-order-card-total {
+    font-weight: 700;
+    color: #27ae60;
+}
+
+/* ========================================
+   Order Detail Modal
+   ======================================== */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal h3 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.modal-lg {
+    max-width: 700px;
+}
+
+.modal .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.order-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.order-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.order-info-label {
+    font-size: 0.75rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.order-info-value {
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+.order-table th {
+    background-color: #f8f9fa;
+    color: #555;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 2px solid #eee;
+    font-weight: 600;
+}
+
+.order-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.order-table tbody tr:hover {
+    background-color: #f8f9fa;
+}

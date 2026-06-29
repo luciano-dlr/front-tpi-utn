@@ -58,6 +58,7 @@ export const PRODUCTS: Product[] = [
     stock: 20,
     imagen: "https://www.shutterstock.com/image-photo/falling-italian-pepperoni-pizza-on-600w-2489309739.jpg",
     disponible: true,
+    categoriaId: 1,
     categorias: [categorias[0]],
   },
   {
@@ -70,6 +71,7 @@ export const PRODUCTS: Product[] = [
     stock: 15,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 1,
     categorias: [categorias[0]],
   },
   {
@@ -82,6 +84,7 @@ export const PRODUCTS: Product[] = [
     stock: 10,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 1,
     categorias: [categorias[0]],
   },
   {
@@ -94,6 +97,7 @@ export const PRODUCTS: Product[] = [
     stock: 30,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 2,
     categorias: [categorias[1]],
   },
   {
@@ -106,6 +110,7 @@ export const PRODUCTS: Product[] = [
     stock: 25,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 2,
     categorias: [categorias[1]],
   },
   {
@@ -118,6 +123,7 @@ export const PRODUCTS: Product[] = [
     stock: 0,
     imagen: "pizza.jpg",
     disponible: false,
+    categoriaId: 2,
     categorias: [categorias[1]],
   },
   {
@@ -130,6 +136,7 @@ export const PRODUCTS: Product[] = [
     stock: 100,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 3,
     categorias: [categorias[2]],
   },
   {
@@ -142,6 +149,7 @@ export const PRODUCTS: Product[] = [
     stock: 40,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 3,
     categorias: [categorias[2]],
   },
   {
@@ -154,6 +162,7 @@ export const PRODUCTS: Product[] = [
     stock: 150,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 3,
     categorias: [categorias[2]],
   },
   {
@@ -166,6 +175,7 @@ export const PRODUCTS: Product[] = [
     stock: 12,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 4,
     categorias: [categorias[3]],
   },
   {
@@ -178,6 +188,7 @@ export const PRODUCTS: Product[] = [
     stock: 30,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 4,
     categorias: [categorias[3]],
   },
   {
@@ -190,6 +201,7 @@ export const PRODUCTS: Product[] = [
     stock: 0,
     imagen: "pizza.jpg",
     disponible: false,
+    categoriaId: 4,
     categorias: [categorias[3]],
   },
   {
@@ -202,6 +214,7 @@ export const PRODUCTS: Product[] = [
     stock: 50,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 5,
     categorias: [categorias[4]],
   },
   {
@@ -214,6 +227,7 @@ export const PRODUCTS: Product[] = [
     stock: 45,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 5,
     categorias: [categorias[4]],
   },
   {
@@ -226,6 +240,7 @@ export const PRODUCTS: Product[] = [
     stock: 60,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 5,
     categorias: [categorias[4]],
   },
   {
@@ -238,6 +253,7 @@ export const PRODUCTS: Product[] = [
     stock: 20,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 6,
     categorias: [categorias[5]],
   },
   {
@@ -250,6 +266,7 @@ export const PRODUCTS: Product[] = [
     stock: 18,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 6,
     categorias: [categorias[5]],
   },
   {
@@ -262,6 +279,7 @@ export const PRODUCTS: Product[] = [
     stock: 10,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 1,
     categorias: [categorias[0]],
   },
   {
@@ -274,6 +292,7 @@ export const PRODUCTS: Product[] = [
     stock: 0,
     imagen: "pizza.jpg",
     disponible: false,
+    categoriaId: 2,
     categorias: [categorias[1]],
   },
   {
@@ -286,6 +305,7 @@ export const PRODUCTS: Product[] = [
     stock: 25,
     imagen: "pizza.jpg",
     disponible: true,
+    categoriaId: 6,
     categorias: [categorias[5]],
   },
 ]

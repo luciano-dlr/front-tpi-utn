@@ -212,7 +212,7 @@ class StoreCart {
         this.updateTotal();
 
         setTimeout(() => {
-            window.location.href = '../home/home.html';
+            window.location.href = '../../client/orders/orders.html';
         }, 2000);
     }
 }

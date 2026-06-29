@@ -5,4 +5,5 @@ export interface ICategory {
     createdAt: string;
     nombre: string;
     descripcion: string;
+    imagen?: string;
 }

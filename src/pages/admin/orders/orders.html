@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración — Pedidos</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="../../../style/admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-header-container">
+            <h1 class="admin-logo">Food Store — Panel de Administración</h1>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <a href="../adminHome/adminHome.html">Dashboard</a>
+                <a href="../categories/categories.html">Categorías</a>
+                <a href="../products/products.html">Productos</a>
+                <a href="../orders/orders.html" class="active">Pedidos</a>
+                <div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem;"></div>
+                <a href="../../store/home/home.html">Ver Tienda</a>
+                <a href="../../client/orders/orders.html">Mis Pedidos</a>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-toolbar">
+                <h2>Pedidos</h2>
+            </div>
+
+            <!-- Status Filter -->
+            <div id="orders-filter" class="orders-filter">
+                <button class="btn-admin btn-admin-primary btn-admin-sm filter-btn active-filter" data-filter="all">Todos</button>
+                <button class="btn-admin btn-admin-sm filter-btn" data-filter="PENDIENTE">Pendientes</button>
+                <button class="btn-admin btn-admin-sm filter-btn" data-filter="CONFIRMADO">Confirmados</button>
+                <button class="btn-admin btn-admin-sm filter-btn" data-filter="TERMINADO">Terminados</button>
+                <button class="btn-admin btn-admin-sm filter-btn" data-filter="CANCELADO">Cancelados</button>
+            </div>
+
+            <!-- Orders Cards -->
+            <div id="orders-container" class="orders-container">
+                <!-- Cards rendered here -->
+            </div>
+
+            <div id="empty-state" class="empty-state" style="display: none;">
+                No hay pedidos con ese estado
+            </div>
+        </main>
+    </div>
+
+    <!-- Detail Modal -->
+    <div id="order-modal" class="modal-overlay">
+        <div class="modal modal-lg">
+            <h3 id="modal-order-title">Pedido #<span id="order-number"></span></h3>
+            <div id="order-detail-content">
+                <div class="order-info-grid">
+                    <div class="order-info-item">
+                        <span class="order-info-label">Cliente</span>
+                        <span id="order-client" class="order-info-value"></span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Fecha</span>
+                        <span id="order-date" class="order-info-value"></span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Estado</span>
+                        <span id="order-status-badge" class="status-badge"></span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Forma de Pago</span>
+                        <span id="order-payment" class="order-info-value"></span>
+                    </div>
+                    <div class="order-info-item">
+                        <span class="order-info-label">Teléfono</span>
+                        <span id="order-phone" class="order-info-value"></span>
+                    </div>
+                </div>
+
+                <h4>Productos</h4>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unit.</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-items-tbody"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: 600;">Subtotal</td>
+                            <td id="order-subtotal" style="font-weight: 600;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: 600;">Envío</td>
+                            <td id="order-shipping" style="font-weight: 600;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="text-align: right; font-weight: 700; font-size: 1rem;">Total</td>
+                            <td id="order-total" style="font-weight: 700; font-size: 1rem;"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                    <label for="input-change-status" class="form-label">Cambiar Estado</label>
+                    <select id="input-change-status" class="form-input">
+                        <option value="PENDIENTE">PENDIENTE</option>
+                        <option value="CONFIRMADO">CONFIRMADO</option>
+                        <option value="TERMINADO">TERMINADO</option>
+                        <option value="CANCELADO">CANCELADO</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="btn-close-modal" class="btn-admin btn-admin-warning">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./orders.ts"></script>
+</body>
+</html>

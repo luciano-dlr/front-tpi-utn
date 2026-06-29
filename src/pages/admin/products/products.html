@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración — Productos</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="../../../style/admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-header-container">
+            <h1 class="admin-logo">Food Store — Panel de Administración</h1>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <a href="../adminHome/adminHome.html">Dashboard</a>
+                <a href="../categories/categories.html">Categorías</a>
+                <a href="../products/products.html" class="active">Productos</a>
+                <a href="../orders/orders.html">Pedidos</a>
+                <div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem;"></div>
+                <a href="../../store/home/home.html">Ver Tienda</a>
+                <a href="../../client/orders/orders.html">Mis Pedidos</a>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-toolbar">
+                <h2>Productos</h2>
+                <button id="btn-nuevo-producto" class="btn-admin btn-admin-success">+ Nuevo Producto</button>
+            </div>
+
+            <!-- Table -->
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Categoría</th>
+                            <th>Imagen</th>
+                            <th>Disponible</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-tbody"></tbody>
+                </table>
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    No hay productos
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create / Edit Modal -->
+    <div id="product-modal" class="modal-overlay">
+        <div class="modal">
+            <h3 id="modal-title">Nuevo Producto</h3>
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="input-nombre" class="form-label">Nombre *</label>
+                    <input type="text" id="input-nombre" class="form-input" placeholder="Nombre del producto" required>
+                    <div id="error-nombre" class="form-error">El nombre es requerido</div>
+                </div>
+                <div class="form-group">
+                    <label for="input-descripcion" class="form-label">Descripción</label>
+                    <textarea id="input-descripcion" class="form-textarea" placeholder="Descripción del producto"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="input-precio" class="form-label">Precio *</label>
+                    <input type="number" id="input-precio" class="form-input" placeholder="0" min="0" step="0.01">
+                    <div id="error-precio" class="form-error">El precio debe ser mayor a 0</div>
+                </div>
+                <div class="form-group">
+                    <label for="input-stock" class="form-label">Stock *</label>
+                    <input type="number" id="input-stock" class="form-input" placeholder="0" min="0" step="1">
+                    <div id="error-stock" class="form-error">El stock no puede ser negativo</div>
+                </div>
+                <div class="form-group">
+                    <label for="input-categoria" class="form-label">Categoría *</label>
+                    <select id="input-categoria" class="form-input">
+                        <option value="">Seleccionar categoría</option>
+                    </select>
+                    <div id="error-categoria" class="form-error">Debe seleccionar una categoría</div>
+                </div>
+                <div class="form-group">
+                    <label for="input-imagen" class="form-label">Imagen URL</label>
+                    <input type="text" id="input-imagen" class="form-input" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="input-disponible" checked>
+                        Disponible
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="btn-cancel-modal" class="btn-admin btn-admin-warning">Cancelar</button>
+                    <button type="submit" id="btn-save-modal" class="btn-admin btn-admin-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="./products.ts"></script>
+</body>
+</html>

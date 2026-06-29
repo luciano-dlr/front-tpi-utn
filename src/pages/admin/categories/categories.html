@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración — Categorías</title>
+    <link rel="stylesheet" href="../../../style.css">
+    <link rel="stylesheet" href="../../../style/admin.css">
+</head>
+<body>
+    <header class="admin-header">
+        <div class="admin-header-container">
+            <h1 class="admin-logo">Food Store — Panel de Administración</h1>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <a href="../adminHome/adminHome.html">Dashboard</a>
+                <a href="../categories/categories.html" class="active">Categorías</a>
+                <a href="../products/products.html">Productos</a>
+                <a href="../orders/orders.html">Pedidos</a>
+                <div style="margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem;"></div>
+                <a href="../../store/home/home.html">Ver Tienda</a>
+                <a href="../../client/orders/orders.html">Mis Pedidos</a>
+            </nav>
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-toolbar">
+                <h2>Categorías</h2>
+                <button id="btn-nueva-categoria" class="btn-admin btn-admin-success">+ Nueva Categoría</button>
+            </div>
+
+            <!-- Table -->
+            <div class="admin-table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categories-tbody"></tbody>
+                </table>
+                <div id="empty-state" class="empty-state" style="display: none;">
+                    No hay categorías
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create / Edit Modal -->
+    <div id="category-modal" class="modal-overlay">
+        <div class="modal">
+            <h3 id="modal-title">Nueva Categoría</h3>
+            <form id="category-form">
+                <div class="form-group">
+                    <label for="input-nombre" class="form-label">Nombre *</label>
+                    <input type="text" id="input-nombre" class="form-input" placeholder="Nombre de la categoría" required>
+                    <div id="error-nombre" class="form-error">El nombre es requerido</div>
+                </div>
+                <div class="form-group">
+                    <label for="input-descripcion" class="form-label">Descripción</label>
+                    <textarea id="input-descripcion" class="form-textarea" placeholder="Descripción de la categoría"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="input-imagen" class="form-label">Imagen URL</label>
+                    <input type="text" id="input-imagen" class="form-input" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="btn-cancel-modal" class="btn-admin btn-admin-warning">Cancelar</button>
+                    <button type="submit" id="btn-save-modal" class="btn-admin btn-admin-success">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="./categories.ts"></script>
+</body>
+</html>

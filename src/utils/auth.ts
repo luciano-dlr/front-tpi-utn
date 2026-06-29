@@ -41,6 +41,13 @@ export function requireAuth(): void {
     }
 }
 
+export function requireAdmin(): void {
+    requireAuth();
+    if (!isAdmin()) {
+        navigate('../../store/home/home.html');
+    }
+}
+
 export function currentUser(): User | null {
     return getSession();
 }
