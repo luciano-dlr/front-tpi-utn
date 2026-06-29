@@ -1,7 +1,9 @@
 ﻿
 import type { CartItem, Product } from "../types/product";
+import type { Order } from "../types/order";
 
 const CART_STORAGE_KEY = 'shopping_cart';
+const ORDERS_KEY = 'user_orders';
 
 export class CartService {
     
@@ -62,5 +64,16 @@ export class CartService {
     
     static clearCart(): void {
         localStorage.removeItem(CART_STORAGE_KEY);
+    }
+
+    static getOrders(): Order[] {
+        const data = localStorage.getItem(ORDERS_KEY);
+        return data ? JSON.parse(data) : [];
+    }
+
+    static saveOrder(order: Order): void {
+        const orders = this.getOrders();
+        orders.push(order);
+        localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
     }
 }

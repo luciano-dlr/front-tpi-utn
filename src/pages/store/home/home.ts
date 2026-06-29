@@ -62,6 +62,15 @@ class StoreHome {
         } else {
             console.warn('show-all-btn NO encontrado en el DOM');
         }
+
+        const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+        if (sortSelect) {
+            sortSelect.addEventListener('change', () => {
+                this.applyFilters();
+            });
+        } else {
+            console.warn('sort-select NO encontrado en el DOM');
+        }
     }
     
     private applyFilters(): void {
@@ -80,8 +89,26 @@ class StoreHome {
         }
         
         this.currentProducts = filtered;
+        this.applySort();
         this.renderProducts();
         this.showNoResultsMessage(filtered.length === 0);
+    }
+
+    private applySort(): void {
+        const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+        if (!sortSelect) return;
+
+        const sortValue = sortSelect.value;
+
+        this.currentProducts.sort((a, b) => {
+            switch (sortValue) {
+                case 'name-asc': return a.nombre.localeCompare(b.nombre);
+                case 'name-desc': return b.nombre.localeCompare(a.nombre);
+                case 'price-asc': return a.precio - b.precio;
+                case 'price-desc': return b.precio - a.precio;
+                default: return 0;
+            }
+        });
     }
     
     private showNoResultsMessage(isEmpty: boolean): void {
@@ -180,15 +207,24 @@ class StoreHome {
             <button class="btn-agregar" data-product-id="${product.id}" ${outOfStock ? 'disabled' : ''}>
                 Agregar al carrito
             </button>
+            <a href="../productDetail/productDetail.html?id=${product.id}" class="ver-detalle-link">Ver detalle</a>
         `;
         
         const addButton = article.querySelector('.btn-agregar');
         if (addButton && product.disponible && availableStock > 0) {
             addButton.addEventListener('click', (e) => {
+                e.stopPropagation();
                 e.preventDefault();
                 this.addToCart(product);
             });
         }
+        
+        // Navigate to product detail on card click
+        article.style.cursor = 'pointer';
+        article.addEventListener('click', (e) => {
+            if ((e.target as HTMLElement).closest('button') || (e.target as HTMLElement).closest('a')) return;
+            window.location.href = `../productDetail/productDetail.html?id=${product.id}`;
+        });
         
         return article;
     }

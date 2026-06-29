@@ -1,6 +1,9 @@
 ﻿import type { CartItem } from "../../../types/product";
+import type { Order, OrderItem, FormaPago } from "../../../types/order";
 import { CartService } from "../../../utils/localStorage";
+import { requireAuth, currentUser } from "../../../utils/auth";
 
+const ENVIO = 0;
 
 class StoreCart {
     private cartItems: CartItem[] = [];
@@ -10,6 +13,7 @@ class StoreCart {
     }
     
     private init(): void {
+        requireAuth();
         this.loadCart();
         this.setupEventListeners();
     }
@@ -135,6 +139,81 @@ class StoreCart {
                 window.location.href = '../home/home.html';
             });
         }
+
+        const confirmBtn = document.getElementById('btn-confirm');
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => this.confirmOrder());
+        }
+    }
+
+    private confirmOrder(): void {
+        const telefonoInput = document.getElementById('telefono') as HTMLInputElement;
+        const formaPagoSelect = document.getElementById('forma-pago') as HTMLSelectElement;
+        const errorDiv = document.getElementById('checkout-error');
+
+        if (!errorDiv) return;
+
+        const telefono = telefonoInput?.value.trim() || '';
+        const formaPago = formaPagoSelect?.value as FormaPago | '';
+
+        if (!telefono) {
+            errorDiv.textContent = 'Por favor, ingresá tu teléfono';
+            errorDiv.style.display = 'block';
+            return;
+        }
+
+        if (!formaPago) {
+            errorDiv.textContent = 'Por favor, seleccioná una forma de pago';
+            errorDiv.style.display = 'block';
+            return;
+        }
+
+        errorDiv.style.display = 'none';
+
+        const user = currentUser();
+        if (!user) {
+            requireAuth();
+            return;
+        }
+
+        const items = CartService.getCart();
+        if (items.length === 0) return;
+
+        const productos: OrderItem[] = items.map(item => ({
+            idProducto: item.product.id,
+            nombre: item.product.nombre,
+            cantidad: item.quantity,
+            precio: item.product.precio,
+            subtotal: item.product.precio * item.quantity,
+        }));
+
+        const subtotal = productos.reduce((sum, p) => sum + p.subtotal, 0);
+
+        const order: Order = {
+            id: Date.now(),
+            idUsuario: user.id,
+            fecha: new Date().toISOString().split('T')[0],
+            estado: 'PENDIENTE',
+            total: subtotal + ENVIO,
+            formaPago: formaPago as FormaPago,
+            telefono,
+            productos,
+        };
+
+        CartService.saveOrder(order);
+        CartService.clearCart();
+
+        const successMsg = document.getElementById('success-message');
+        if (successMsg) {
+            successMsg.style.display = 'block';
+        }
+
+        this.renderCart();
+        this.updateTotal();
+
+        setTimeout(() => {
+            window.location.href = '../home/home.html';
+        }, 2000);
     }
 }
 

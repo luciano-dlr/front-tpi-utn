@@ -36,6 +36,12 @@
                     placeholder="🔍 Buscar productos por nombre..."
                     class="search-input"
                 >
+                <select id="sort-select" class="sort-select">
+                    <option value="name-asc">Nombre A-Z</option>
+                    <option value="name-desc">Nombre Z-A</option>
+                    <option value="price-asc">Precio ascendente</option>
+                    <option value="price-desc">Precio descendente</option>
+                </select>
             </div>
             
             <div id="contenedor-productos" class="products-grid"></div>
