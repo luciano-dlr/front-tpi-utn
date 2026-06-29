@@ -7,7 +7,7 @@
     "total": 15000,
     "formaPago": "TARJETA",
     "telefono": "2222222222",
-    "productos": [
+    "detalles": [
       {
         "idProducto": 1,
         "nombre": "Pizza Muzzarella",
@@ -39,7 +39,7 @@
     "total": 8600,
     "formaPago": "TRANSFERENCIA",
     "telefono": "2222222222",
-    "productos": [
+    "detalles": [
       {
         "idProducto": 4,
         "nombre": "Hamburguesa Clásica",

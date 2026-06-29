@@ -1,7 +1,7 @@
 ﻿import type { CartItem } from "../../../types/product";
 import type { Order, OrderItem, FormaPago } from "../../../types/order";
 import { CartService } from "../../../utils/localStorage";
-import { requireAuth, currentUser } from "../../../utils/auth";
+import { requireAuth, currentUser, destroySession } from "../../../utils/auth";
 
 const ENVIO = 0;
 
@@ -108,9 +108,20 @@ class StoreCart {
     }
     
     private updateTotal(): void {
-        const total = CartService.getTotal();
+        const subtotal = this.cartItems.reduce((sum, item) => sum + item.product.precio * item.quantity, 0);
+        const total = subtotal + ENVIO;
         const totalElement = document.getElementById('cart-total');
+        const subtotalElement = document.getElementById('cart-subtotal');
+        const envioElement = document.getElementById('cart-envio');
         const totalItemsElement = document.getElementById('total-items');
+        
+        if (subtotalElement) {
+            subtotalElement.textContent = `$${subtotal.toLocaleString()}`;
+        }
+        
+        if (envioElement) {
+            envioElement.textContent = `$${ENVIO.toLocaleString()}`;
+        }
         
         if (totalElement) {
             totalElement.textContent = `$${total.toLocaleString()}`;
@@ -143,6 +154,14 @@ class StoreCart {
         const confirmBtn = document.getElementById('btn-confirm');
         if (confirmBtn) {
             confirmBtn.addEventListener('click', () => this.confirmOrder());
+        }
+
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
+            });
         }
     }
 
@@ -179,7 +198,7 @@ class StoreCart {
         const items = CartService.getCart();
         if (items.length === 0) return;
 
-        const productos: OrderItem[] = items.map(item => ({
+        const detalles: OrderItem[] = items.map(item => ({
             idProducto: item.product.id,
             nombre: item.product.nombre,
             cantidad: item.quantity,
@@ -187,7 +206,7 @@ class StoreCart {
             subtotal: item.product.precio * item.quantity,
         }));
 
-        const subtotal = productos.reduce((sum, p) => sum + p.subtotal, 0);
+        const subtotal = detalles.reduce((sum, p) => sum + p.subtotal, 0);
 
         const order: Order = {
             id: Date.now(),
@@ -197,7 +216,7 @@ class StoreCart {
             total: subtotal + ENVIO,
             formaPago: formaPago as FormaPago,
             telefono,
-            productos,
+            detalles,
         };
 
         CartService.saveOrder(order);

@@ -1,5 +1,5 @@
 ﻿import { fetchProducts, fetchCategories } from '../../../utils/fetch';
-import { requireAuth } from '../../../utils/auth';
+import { requireAuth, destroySession } from '../../../utils/auth';
 import type { ICategory } from "../../../types/category";
 import type { Product } from "../../../types/product";
 import {  CartService } from "../../../utils/localStorage";
@@ -27,12 +27,14 @@ class StoreHome {
             categoryMap[cat.id] = cat as ICategory;
         });
 
-        // Fetch products and map categoriaId → categorias array
+        // Fetch products, map categoriaId → categorias array, and filter out unavailable/deleted
         const rawProducts = await fetchProducts();
-        this.products = rawProducts.map((p: any) => ({
-            ...p,
-            categorias: p.categoriaId ? [categoryMap[p.categoriaId]].filter(Boolean) : [],
-        })) as Product[];
+        this.products = rawProducts
+            .map((p: any) => ({
+                ...p,
+                categorias: p.categoriaId ? [categoryMap[p.categoriaId]].filter(Boolean) : [],
+            }))
+            .filter((p: Product) => p.disponible && !p.eliminado) as Product[];
         this.currentProducts = [...this.products];
 
         this.renderCategories();
@@ -70,6 +72,14 @@ class StoreHome {
             });
         } else {
             console.warn('sort-select NO encontrado en el DOM');
+        }
+
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
+            });
         }
     }
     

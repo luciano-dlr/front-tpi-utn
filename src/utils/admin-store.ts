@@ -32,9 +32,9 @@ export class AdminStore<T extends WithId> {
     }
 
     delete(id: number): boolean {
-        const index = this.items.findIndex(item => item.id === id);
-        if (index === -1) return false;
-        this.items.splice(index, 1);
+        const item = this.items.find(item => item.id === id);
+        if (!item) return false;
+        (item as any).eliminado = true;
         return true;
     }
 }

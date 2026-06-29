@@ -1,4 +1,4 @@
-import { requireAdmin } from '../../../utils/auth';
+import { requireAdmin, destroySession } from '../../../utils/auth';
 import { AdminStore } from '../../../utils/admin-store';
 import type { ICategory } from '../../../types/category';
 
@@ -105,6 +105,14 @@ class AdminCategories {
                 if (error) error.style.display = 'none';
             });
         }
+
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
+            });
+        }
     }
 
     private openCreateModal(): void {
@@ -142,6 +150,10 @@ class AdminCategories {
 
         const descripcion = (document.getElementById('input-descripcion') as HTMLTextAreaElement).value.trim();
         const imagen = (document.getElementById('input-imagen') as HTMLInputElement).value.trim();
+
+        if (!imagen) {
+            // imagen vacío, asignar placeholder
+        }
 
         if (this.editingId !== null) {
             this.store.update(this.editingId, { nombre, descripcion, imagen } as Partial<ICategory>);

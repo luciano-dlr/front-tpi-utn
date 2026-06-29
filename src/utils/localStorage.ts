@@ -16,14 +16,14 @@ export class CartService {
         localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     }
     
-    static addProduct(product: Product): void {
+    static addProduct(product: Product, quantity: number = 1): void {
         const cart = this.getCart();
         const existingItem = cart.find(item => item.product.id === product.id);
         
         if (existingItem) {
-            existingItem.quantity++;
+            existingItem.quantity += quantity;
         } else {
-            cart.push({ product, quantity: 1 });
+            cart.push({ product, quantity });
         }
         
         this.saveCart(cart);

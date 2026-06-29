@@ -1,4 +1,4 @@
-import { requireAdmin } from '../../../utils/auth';
+import { requireAdmin, destroySession } from '../../../utils/auth';
 import { AdminStore } from '../../../utils/admin-store';
 import type { Product } from '../../../types/product';
 import type { ICategory } from '../../../types/category';
@@ -48,6 +48,7 @@ class AdminProducts {
             const imgSrc = product.imagen || 'https://placehold.co/50x50?text=?';
             const tr = document.createElement('tr');
             tr.innerHTML = `
+                <td>${product.id}</td>
                 <td>${product.nombre}</td>
                 <td>${product.descripcion || '-'}</td>
                 <td>$${product.precio.toFixed(2)}</td>
@@ -149,6 +150,14 @@ class AdminProducts {
             categoriaSelect.addEventListener('change', () => {
                 const error = document.getElementById('error-categoria');
                 if (error) error.style.display = 'none';
+            });
+        }
+
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
             });
         }
     }

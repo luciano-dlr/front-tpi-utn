@@ -1,4 +1,4 @@
-import { requireAuth, currentUser } from '../../../utils/auth';
+import { requireAuth, currentUser, destroySession } from '../../../utils/auth';
 import { fetchOrders } from '../../../utils/fetch';
 import { CartService } from '../../../utils/localStorage';
 import type { Order } from '../../../types/order';
@@ -53,8 +53,8 @@ class ClientOrders {
 
         this.orders.forEach(order => {
             const statusClass = this.getStatusClass(order.estado);
-            const productNames = order.productos.slice(0, 3).map(p => p.nombre);
-            const remaining = order.productos.length - 3;
+            const productNames = order.detalles.slice(0, 3).map(p => p.nombre);
+            const remaining = order.detalles.length - 3;
             let productsHtml = productNames.join(', ');
             if (remaining > 0) {
                 productsHtml += ` y ${remaining} más`;
@@ -109,7 +109,7 @@ class ClientOrders {
         // Items table
         const tbody = document.getElementById('order-items-tbody')!;
         tbody.innerHTML = '';
-        order.productos.forEach(item => {
+        order.detalles.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${item.nombre}</td>
@@ -121,7 +121,7 @@ class ClientOrders {
         });
 
         // Cost breakdown
-        const subtotal = order.productos.reduce((s, i) => s + i.subtotal, 0);
+        const subtotal = order.detalles.reduce((s, i) => s + i.subtotal, 0);
         const shipping = order.total - subtotal;
 
         document.getElementById('order-subtotal')!.textContent = `$${subtotal.toFixed(2)}`;
@@ -153,6 +153,14 @@ class ClientOrders {
         if (overlay) {
             overlay.addEventListener('click', (e: MouseEvent) => {
                 if (e.target === overlay) this.closeModal();
+            });
+        }
+
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
             });
         }
     }

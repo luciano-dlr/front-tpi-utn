@@ -1,4 +1,4 @@
-import { requireAdmin } from '../../../utils/auth';
+import { requireAdmin, destroySession } from '../../../utils/auth';
 import { AdminStore } from '../../../utils/admin-store';
 import type { Order, Estado } from '../../../types/order';
 import type { User } from '../../../types/user';
@@ -57,7 +57,7 @@ class AdminOrders {
 
         filtered.forEach(order => {
             const statusClass = order.estado.toLowerCase();
-            const itemCount = order.productos.reduce((sum, item) => sum + item.cantidad, 0);
+            const itemCount = order.detalles.reduce((sum, item) => sum + item.cantidad, 0);
             const card = document.createElement('div');
             card.className = 'order-card';
             card.dataset.id = order.id.toString();
@@ -114,7 +114,7 @@ class AdminOrders {
         // Items table
         const tbody = document.getElementById('order-items-tbody')!;
         tbody.innerHTML = '';
-        order.productos.forEach(item => {
+        order.detalles.forEach(item => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${item.nombre}</td>
@@ -126,7 +126,7 @@ class AdminOrders {
         });
 
         // Computed fields
-        const subtotal = order.productos.reduce((s, i) => s + i.subtotal, 0);
+        const subtotal = order.detalles.reduce((s, i) => s + i.subtotal, 0);
         const shipping = order.total - subtotal;
 
         document.getElementById('order-subtotal')!.textContent = `$${subtotal.toFixed(2)}`;
@@ -195,6 +195,14 @@ class AdminOrders {
                 // Reload sorted orders and re-render cards
                 this.currentOrders = this.getSortedOrders();
                 this.renderCards();
+            });
+        }
+
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
             });
         }
     }

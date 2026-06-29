@@ -1,10 +1,11 @@
-import { requireAdmin } from '../../../utils/auth';
+import { requireAdmin, destroySession } from '../../../utils/auth';
 import { AdminStore } from '../../../utils/admin-store';
 
 class AdminDashboard {
     private categoryStore = new AdminStore<any>();
     private productStore = new AdminStore<any>();
     private orderStore = new AdminStore<any>();
+    private userStore = new AdminStore<any>();
 
     constructor() {
         this.init();
@@ -17,22 +18,26 @@ class AdminDashboard {
             this.categoryStore.loadFromJSON('/data/categorias.json'),
             this.productStore.loadFromJSON('/data/productos.json'),
             this.orderStore.loadFromJSON('/data/pedidos.json'),
+            this.userStore.loadFromJSON('/data/usuarios.json'),
         ]);
 
         this.renderStats();
         this.renderSummaries();
+        this.setupEventListeners();
     }
 
     private renderStats(): void {
         const categories = this.categoryStore.getAll();
         const products = this.productStore.getAll();
         const orders = this.orderStore.getAll();
+        const users = this.userStore.getAll();
         const availableProducts = products.filter((p: any) => p.disponible && p.stock > 0);
 
         this.setText('stat-categories', categories.length);
         this.setText('stat-products', products.length);
         this.setText('stat-orders', orders.length);
         this.setText('stat-available', availableProducts.length);
+        this.setText('stat-users', users.length);
     }
 
     private renderSummaries(): void {
@@ -65,6 +70,16 @@ class AdminDashboard {
         const el = document.getElementById(id);
         if (el) {
             el.textContent = value.toString();
+        }
+    }
+
+    private setupEventListeners(): void {
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
+            });
         }
     }
 }

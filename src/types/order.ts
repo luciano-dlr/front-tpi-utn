@@ -17,5 +17,5 @@ export interface Order {
     total: number;
     formaPago: FormaPago;
     telefono: string;
-    productos: OrderItem[];
+    detalles: OrderItem[];
 }

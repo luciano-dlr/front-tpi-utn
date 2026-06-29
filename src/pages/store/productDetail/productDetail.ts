@@ -1,5 +1,5 @@
 import { fetchProducts } from '../../../utils/fetch';
-import { requireAuth } from '../../../utils/auth';
+import { requireAuth, destroySession } from '../../../utils/auth';
 import { CartService } from '../../../utils/localStorage';
 import type { Product } from '../../../types/product';
 
@@ -92,6 +92,8 @@ class ProductDetail {
             this.setupQuantityControls(availableStock);
             this.setupAddToCart();
         }
+
+        this.setupLogout();
     }
 
     private setupQuantityControls(maxStock: number): void {
@@ -133,9 +135,7 @@ class ProductDetail {
             const qtySpan = document.getElementById('qty-value');
             const quantity = qtySpan ? parseInt(qtySpan.textContent || '1', 10) : 1;
 
-            for (let i = 0; i < quantity; i++) {
-                CartService.addProduct(this.product!);
-            }
+            CartService.addProduct(this.product!, quantity);
 
             const successMsg = document.getElementById('add-success');
             if (successMsg) {
@@ -148,6 +148,16 @@ class ProductDetail {
             this.updateCartCount();
             this.render();
         });
+    }
+
+    private setupLogout(): void {
+        const logoutBtn = document.getElementById('btn-logout');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                destroySession();
+            });
+        }
     }
 
     private updateCartCount(): void {

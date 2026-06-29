@@ -15,6 +15,7 @@
                 <a href="../home/home.html">Catálogo</a>
                 <a href="../../client/orders/orders.html">Mis Pedidos</a>
                 <a href="../cart/cart.html" class="active"> Carrito</a>
+                <a href="#" id="btn-logout">Cerrar sesión</a>
             </nav>
         </div>
     </header>
@@ -34,8 +35,16 @@
             
             <div class="cart-summary">
                 <div class="summary-row">
-                    <span>Total de productos:</span>
+                    <span>Productos:</span>
                     <span id="total-items">0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Envío:</span>
+                    <span id="cart-envio">$0</span>
                 </div>
                 <div class="summary-row total">
                     <span>Total a pagar:</span>
