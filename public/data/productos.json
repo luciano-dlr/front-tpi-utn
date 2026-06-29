@@ -1,0 +1,189 @@
+[
+  {
+    "id": 1,
+    "nombre": "Pizza Muzzarella",
+    "precio": 4500,
+    "descripcion": "Pizza clásica con salsa de tomate y muzzarella derretida",
+    "stock": 20,
+    "imagen": "https://www.shutterstock.com/image-photo/falling-italian-pepperoni-pizza-on-600w-2489309739.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 1
+  },
+  {
+    "id": 2,
+    "nombre": "Pizza Napolitana",
+    "precio": 5200,
+    "descripcion": "Pizza con rodajas de tomate fresco, ajo y albahaca",
+    "stock": 15,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 1
+  },
+  {
+    "id": 3,
+    "nombre": "Pizza Especial 4 Quesos",
+    "precio": 6800,
+    "descripcion": "Muzzarella, provolone, roquefort y parmesano",
+    "stock": 10,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 1
+  },
+  {
+    "id": 4,
+    "nombre": "Hamburguesa Clásica",
+    "precio": 3800,
+    "descripcion": "Medallón de carne, lechuga, tomate, cebolla y mayo",
+    "stock": 30,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 2
+  },
+  {
+    "id": 5,
+    "nombre": "Hamburguesa BBQ Bacon",
+    "precio": 5100,
+    "descripcion": "Doble medallón, bacon crocante y salsa barbacoa ahumada",
+    "stock": 25,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 2
+  },
+  {
+    "id": 7,
+    "nombre": "Coca-Cola 500ml",
+    "precio": 1200,
+    "descripcion": "Gaseosa Coca-Cola fría, botella personal",
+    "stock": 100,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 3
+  },
+  {
+    "id": 8,
+    "nombre": "Jugo de Naranja Natural",
+    "precio": 1800,
+    "descripcion": "Jugo exprimido en el momento, vaso 400ml",
+    "stock": 40,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 3
+  },
+  {
+    "id": 9,
+    "nombre": "Agua Mineral 500ml",
+    "precio": 800,
+    "descripcion": "Agua mineral sin gas, botella personal",
+    "stock": 150,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 3
+  },
+  {
+    "id": 10,
+    "nombre": "Torta Rogel",
+    "precio": 3500,
+    "descripcion": "Torta rogel tradicional con dulce de leche y merengue",
+    "stock": 12,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 4
+  },
+  {
+    "id": 11,
+    "nombre": "Helado Artesanal 2 gustos",
+    "precio": 2800,
+    "descripcion": "Pote de 250g, elegí 2 gustos entre 12 opciones",
+    "stock": 30,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 4
+  },
+  {
+    "id": 13,
+    "nombre": "Empanadas de Carne x6",
+    "precio": 3000,
+    "descripcion": "Empanadas criollas de carne cortada a cuchillo, horneadas",
+    "stock": 50,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 5
+  },
+  {
+    "id": 14,
+    "nombre": "Empanadas de Pollo x6",
+    "precio": 2800,
+    "descripcion": "Empanadas de pollo con morrón y verdeo, horneadas",
+    "stock": 45,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 5
+  },
+  {
+    "id": 15,
+    "nombre": "Empanadas de Jamón y Queso x6",
+    "precio": 2500,
+    "descripcion": "Empanadas fritas con jamón cocido y queso fundido",
+    "stock": 60,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 5
+  },
+  {
+    "id": 16,
+    "nombre": "Ensalada César",
+    "precio": 3200,
+    "descripcion": "Lechuga romana, crutones, parmesano y aderezo césar",
+    "stock": 20,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 6
+  },
+  {
+    "id": 17,
+    "nombre": "Ensalada Caprese",
+    "precio": 2900,
+    "descripcion": "Tomate, muzzarella fresca, albahaca y aceite de oliva",
+    "stock": 18,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 6
+  },
+  {
+    "id": 18,
+    "nombre": "Pizza Fugazzeta",
+    "precio": 5500,
+    "descripcion": "Pizza rellena de muzzarella con cebolla caramelizada",
+    "stock": 10,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 1
+  },
+  {
+    "id": 20,
+    "nombre": "Ensalada Mixta",
+    "precio": 2400,
+    "descripcion": "Lechuga, tomate, zanahoria rallada y aceitunas",
+    "stock": 25,
+    "imagen": "pizza.jpg",
+    "disponible": true,
+    "eliminado": false,
+    "categoriaId": 6
+  }
+]

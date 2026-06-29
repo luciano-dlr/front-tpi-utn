@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "nombre": "Admin",
+    "apellido": "Food",
+    "mail": "admin@food.com",
+    "password": "admin123",
+    "celular": "1111111111",
+    "rol": "ADMIN"
+  },
+  {
+    "id": 2,
+    "nombre": "Cliente",
+    "apellido": "Food",
+    "mail": "cliente@food.com",
+    "password": "cliente123",
+    "celular": "2222222222",
+    "rol": "USUARIO"
+  }
+]

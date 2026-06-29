@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Store - Iniciar Sesión</title>
+    <link rel="stylesheet" href="../../../style.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <h1 class="logo">Food Store</h1>
+            <nav class="main-nav">
+                <a href="../../store/home/home.html">Catálogo</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2 class="auth-title">Iniciar Sesión</h2>
+            <p class="auth-subtitle">Ingresá tus credenciales para acceder</p>
+
+            <div id="error-message" class="form-error"></div>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="tu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" id="password" class="form-input" placeholder="••••••" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Ingresar</button>
+            </form>
+
+            <div class="auth-links">
+                <p>¿No tenés cuenta? <a href="../register/register.html">Registrate</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./login.ts"></script>
+</body>
+</html>

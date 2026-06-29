@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "idUsuario": 2,
+    "fecha": "2024-03-15",
+    "estado": "TERMINADO",
+    "total": 15000,
+    "formaPago": "TARJETA",
+    "telefono": "2222222222",
+    "productos": [
+      {
+        "idProducto": 1,
+        "nombre": "Pizza Muzzarella",
+        "cantidad": 2,
+        "precio": 4500,
+        "subtotal": 9000
+      },
+      {
+        "idProducto": 7,
+        "nombre": "Coca-Cola 500ml",
+        "cantidad": 2,
+        "precio": 1200,
+        "subtotal": 2400
+      },
+      {
+        "idProducto": 10,
+        "nombre": "Torta Rogel",
+        "cantidad": 1,
+        "precio": 3500,
+        "subtotal": 3500
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "idUsuario": 2,
+    "fecha": "2024-03-20",
+    "estado": "PENDIENTE",
+    "total": 8600,
+    "formaPago": "TRANSFERENCIA",
+    "telefono": "2222222222",
+    "productos": [
+      {
+        "idProducto": 4,
+        "nombre": "Hamburguesa Clásica",
+        "cantidad": 1,
+        "precio": 3800,
+        "subtotal": 3800
+      },
+      {
+        "idProducto": 16,
+        "nombre": "Ensalada César",
+        "cantidad": 1,
+        "precio": 3200,
+        "subtotal": 3200
+      },
+      {
+        "idProducto": 9,
+        "nombre": "Agua Mineral 500ml",
+        "cantidad": 2,
+        "precio": 800,
+        "subtotal": 1600
+      }
+    ]
+  }
+]

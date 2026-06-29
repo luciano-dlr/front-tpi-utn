@@ -8,6 +8,8 @@ export default defineConfig({
         index: resolve(__dirname, "index.html"),
         storeHome: resolve(__dirname, 'src/pages/store/home/home.html'),
         storeCart: resolve(__dirname, 'src/pages/store/cart/cart.html'),
+        authLogin: resolve(__dirname, 'src/pages/auth/login/login.html'),
+        authRegister: resolve(__dirname, 'src/pages/auth/register/register.html'),
       },
     },
   },

@@ -1,18 +1,40 @@
-﻿import { getCategories, PRODUCTS } from "../../../data/data";
+﻿import { fetchProducts, fetchCategories } from '../../../utils/fetch';
+import { requireAuth } from '../../../utils/auth';
 import type { ICategory } from "../../../types/category";
 import type { Product } from "../../../types/product";
 import {  CartService } from "../../../utils/localStorage";
 
 
 class StoreHome {
-    private products: Product[] = PRODUCTS;
-    private categories: ICategory[] = getCategories();
-    private currentProducts: Product[] = [...this.products];
+    private products: Product[] = [];
+    private categories: ICategory[] = [];
+    private currentProducts: Product[] = [];
     private currentCategory: string | null = null;
     private searchTerm: string = '';
     
     constructor() {
-        console.trace('   traza constructor');
+        this.init();
+    }
+
+    private async init(): Promise<void> {
+        requireAuth();
+
+        // Fetch categories and build lookup map
+        const rawCategories = await fetchCategories();
+        this.categories = rawCategories;
+        const categoryMap: Record<number, ICategory> = {};
+        rawCategories.forEach((cat: any) => {
+            categoryMap[cat.id] = cat as ICategory;
+        });
+
+        // Fetch products and map categoriaId → categorias array
+        const rawProducts = await fetchProducts();
+        this.products = rawProducts.map((p: any) => ({
+            ...p,
+            categorias: p.categoriaId ? [categoryMap[p.categoriaId]].filter(Boolean) : [],
+        })) as Product[];
+        this.currentProducts = [...this.products];
+
         this.renderCategories();
         this.renderProducts();
         this.setupEventListeners();
