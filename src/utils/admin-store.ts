@@ -11,7 +11,7 @@ export class AdminStore<T extends WithId> {
     }
 
     getAll(): T[] {
-        return [...this.items];
+        return this.items.filter(item => !(item as any).eliminado);
     }
 
     getById(id: number): T | null {
